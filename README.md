@@ -6,7 +6,7 @@ Banco de Dados MySQL instalado.
 
 ## Backend
 * [Express](http://expressjs.com/) - Framework de aplicação WEB em NodeJS
-* [MySQL](https://www.npmjs.com/package/mysql) - Plugind de conexão com o BD
+* [MySQL](https://www.npmjs.com/package/mysql) - Plugin de conexão com o BD
 
 ## Frontend
 * [jQuery](https://jquery.com/) - Biblioteca Javascript
