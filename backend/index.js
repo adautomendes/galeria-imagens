@@ -2,6 +2,7 @@ var express = require('express');
 var cors = require('cors')
 var mysql = require('mysql');
 var fs = require('fs');
+var CronJob = require('cron').CronJob;
 var util = require('./util.js');
 
 const imgFolder = 'imagens';
@@ -15,7 +16,7 @@ var con = {
     database: 'galeria'
 }
 
-function updateDB() {
+function atualizarBD() {
     util.logInfo("Populando banco de dados, baseado na pasta 'imagens'...");
 
     var connection = mysql.createConnection(con);
@@ -55,13 +56,24 @@ function buscarImagens(req, res, next) {
     });
 }
 
-app.use(cors())
-app.use('/imagens', express.static(imgFolder));
+/*************************/
+/* JOB PARA ATUALIZAR BD */
+/*************************/
 
-app.get('/buscarImagens', buscarImagens);
+var bdJob = new CronJob('* * * * *', function () { //* * * * * => fará que o esse job seja executado a todo minuto
+    atualizarBD();
+});
+
+/*************************/
+
+app.use(cors())
+app.use('/imagens', express.static(imgFolder)); //Expondo repositório de arquivos estáticos
+
+app.get('/buscarImagens', buscarImagens); //Endpoint de busca das imagens
 
 app.listen(3000, function () {
     console.log('Servidor rodando na porta 3000!');
-    updateDB();
+    atualizarBD();
+    bdJob.start();
 });
 

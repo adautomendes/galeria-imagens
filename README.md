@@ -1,5 +1,5 @@
 # galeria-imagens
-Um pequeno exemplo didático de como se montar uma galeria de imagens utilizando Express com AJAX.
+Um pequeno exemplo didático de como se montar uma galeria de imagens utilizando Express com AJAX. O banco de dados está configurado no backend para atualizar sua tabela a cada minuto, varrendo a pasta 'imagens'.
 
 ## Dependências
 Banco de Dados MySQL instalado.
